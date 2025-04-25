@@ -1,19 +1,17 @@
-@import url("https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Catamaran:wght@100..900&display=swap");
+@import url("https://use.typekit.net/msb6uht.css");
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap");
 
 :root {
   --white: #fff;
-  --main_primary: #179bd9;
-  --main_primary_dark: #0d75a6;
-  --main_primary_darker: #577b81;
-  --main_primary_medium: #5e9bb7;
-  --main_primary_light: #8fd8fb;
-  --main_primary_lighter: #e1f7fb;
-  --main_primary_very_light: #d5eefa;
+  --main_primary: #4cccdd;
+  --main_primary_dark: #4f737d;
+  --main_primary_darker: #213133;
+  --main_primary_medium: #a5e5ee;
+  --main_primary_light: #e4f8fa;
+  --main_primary_lighter: #f6fdfe;
 
-  --main_secondary: #ed702e;
-  --main_secondary_light: #fcdfcf;
-  --main_secondary_lighter: #fff9f7;
+  --main_secondary: #fe5b5e;
+  --main_secondary_light: rgba(254, 91, 94, 0.3);
 
   --green: #018793;
   --lightgreen: #deeaeb;
@@ -28,10 +26,10 @@
   --breakpoint-md: 768px;
   --breakpoint-lg: 992px;
   --breakpoint-xl: 1200px;
-  --font-default: "Catamaran", sans-serif;
-  --font-title: "Dosis", sans-serif;
-  --radius-big: 100px;
-  --radius-medium: 50px;
-  --radius-small: 15px;
-  --shadow: 0px 0px 7px 0px #0000001f;
+  --font-default: "proxima-nova", sans-serif;
+  --font-title: "Lexend", sans-serif;
+  --radius-big: 30px;
+  --radius-small: 20px;
+  --shadow: 4px 4px #4f737d;
+  --shadow-hover: 1px 1px #4f737d;
 }

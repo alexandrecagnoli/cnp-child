@@ -1,4 +1,5 @@
 
+
 /* ============
 Import variable 
 =============*/
@@ -6,51 +7,4 @@ Import variable
 
 .container {
   max-width: 1660px;
-}
-
-/* ===============
-    PRIMARY
-   =============== */
-
-/*== ULTIMATE MEMBER ==*/
-
-.um:not(.um-admin) {
-  opacity: 1;
-}
-.um-page-login .page-title {
-}
-.um-button {
-}
-.um-button:hover {
-}
-
-/*== TEMPLATE ==*/
-
-.page-template-page-log1 .mast-head,
-.page-template-page-log2 .mast-head {
-}
-.page-template-page-log1 .section-login,
-.page-template-page-log2 .section-login {
-}
-
-.page-template-page-log1 .section-login {
-}
-.page-template-page-log1 .section-login .btn {
-}
-.page-template-page-log1 .section-login .block-login {
-}
-
-.page-template-page-log2 .section-login {
-}
-.page-template-page-log2 .section-content {
-}
-.page-template-page-log2 .section-content .readmorelink {
-}
-.page-template-page-log2 .section-login .block-login {
-}
-@media screen and (min-width: 992px) {
-  .page-template-page-log2 .layout-2-col {
-  }
-  .page-template-page-log2 .section-login .block-login {
-  }
 }
