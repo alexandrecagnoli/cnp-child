@@ -15,7 +15,7 @@ Import variable
 /*== ULTIMATE MEMBER ==*/
 
 .um:not(.um-admin) {
-  opacity: 1;
+  opacity: 1!important;
 }
 .um-page-login .page-title {
 }
