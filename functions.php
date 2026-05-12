@@ -94,3 +94,52 @@ if (!current_user_can('administrator')) {
   add_filter('show_admin_bar', '__return_false');
 }
 # add_filter( 'um_disable_dynamic_global_css', '__return_true' );
+
+
+/**
+ * Inject the ACF `hero_image` field into the hero <img> on the front page.
+ *
+ * The parent template renders an empty `<img src="" alt=""/>` inside
+ * `.hero-image`. We hydrate it server-side from the ACF field — no JS,
+ * no reflow, no extra request beyond the image itself.
+ */
+add_action('template_redirect', 'cnp_child_inject_hero_image');
+function cnp_child_inject_hero_image()
+{
+  if (!is_front_page() && !is_home()) return;
+  if (!function_exists('get_field')) return;
+
+  ob_start('cnp_child_replace_hero_image');
+}
+
+function cnp_child_replace_hero_image($html)
+{
+  $img = get_field('hero_image');
+  if (empty($img)) return $html;
+
+  if (is_array($img)) {
+    $url = $img['url'] ?? ($img['sizes']['large'] ?? '');
+    $alt = $img['alt'] ?? '';
+  } elseif (is_numeric($img)) {
+    $url = wp_get_attachment_image_url((int)$img, 'large');
+    $alt = get_post_meta((int)$img, '_wp_attachment_image_alt', true) ?: '';
+  } else {
+    $url = (string)$img;
+    $alt = '';
+  }
+
+  if (!$url) return $html;
+
+  $replacement = sprintf(
+    '<img src="%s" alt="%s"/>',
+    esc_url($url),
+    esc_attr($alt)
+  );
+
+  return preg_replace(
+    '#(<div class="hero-image[^"]*"[^>]*>\s*)<img\s+src=""\s+alt=""\s*/?>#i',
+    '$1' . $replacement,
+    $html,
+    1
+  );
+}

@@ -126,27 +126,62 @@ a:not(.btn):hover { opacity: 0.85; }
 
 /* ============================================================
    HERO — ARMPO spec
+   Full-bleed section; 50/50 split with text left, ACF image right.
    Gradient forced over inline bg-image (inline style wins normally).
    NOTE: HTML5 auto-closes <h2> when it sees nested <h1>, so the
    real H1 is a SIBLING of .hero-title — we style both.
    ============================================================ */
 .hero.hero-jumbo {
   position: relative;
-  padding: 0;
+  padding: 0 !important;
+  margin: 0;
+  width: 100%;
   background-image: linear-gradient(312deg, #071D1F 29.35%, #9D6BFF 167.24%) !important;
   background-color: #071D1F;
+  background-size: cover;
   overflow: hidden;
 }
 
+/* full-bleed container inside hero only (other sections keep theirs) */
 .hero.hero-jumbo > .container {
   position: relative;
   z-index: 1;
-  padding-top: 5em;
-  padding-bottom: 5em;
+  max-width: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  align-items: stretch;
   min-height: 520px;
 }
 
-.hero-jumbo .hero-content { max-width: 720px; }
+@media screen and (min-width: 768px) {
+  .hero.hero-jumbo > .container {
+    display: flex;
+    flex-direction: row;
+  }
+  .hero-jumbo .hero-content {
+    flex: 1 1 50%;
+    max-width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4em max(2em, calc((100vw - 1670px) / 2 + 2em));
+  }
+  .hero-jumbo .hero-image {
+    flex: 1 1 50%;
+    max-width: 50%;
+    align-self: stretch;
+    margin: 0;
+    overflow: hidden;
+  }
+  .hero-jumbo .hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 0;
+  }
+}
 
 /* Main title — "Gros texte h1" */
 .hero-content h1,
