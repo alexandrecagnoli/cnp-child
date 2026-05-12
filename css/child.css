@@ -128,8 +128,8 @@ a:not(.btn):hover { opacity: 0.85; }
    HERO — ARMPO spec
    Full-bleed section; 50/50 split with text left, ACF image right.
    Gradient forced over inline bg-image (inline style wins normally).
-   NOTE: HTML5 auto-closes <h2> when it sees nested <h1>, so the
-   real H1 is a SIBLING of .hero-title — we style both.
+   Markup is now clean (<h1 class="hero-title"><span>…</span>…</h1>),
+   served by the child's includes/partial/hero.php override.
    ============================================================ */
 .hero.hero-jumbo {
   position: relative;
@@ -229,12 +229,9 @@ a:not(.btn):hover { opacity: 0.85; }
 
 /* hero CTA picks up the global .btn-orange mint spec */
 
-/* hero-image is a real CMS field — keep it in the flow, just hide the
-   <img> when src is empty so layout stays clean until populated */
-.hero .hero-image img[src=""],
-.hero .hero-image img:not([src]) { visibility: hidden; }
+/* hero-image: the partial only emits an <img> when hero_image is set,
+   so no fallback visibility hack needed. */
 .hero .hero-image img {
-  border-radius: var(--radius-small);
   object-fit: cover;
 }
 
