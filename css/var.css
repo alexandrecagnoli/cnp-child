@@ -22,9 +22,10 @@
   --main_primary_lighter: #e6f7f4;
   --main_primary_very_light: #f5fbf9;
 
-  --main_secondary: #ed702e;
-  --main_secondary_light: #fcdfcf;
-  --main_secondary_lighter: #fff9f7;
+  /* legacy "secondary" remapped to ARMPO charter (no orange in the theme) */
+  --main_secondary: #305c5f;
+  --main_secondary_light: #b1ebe0;
+  --main_secondary_lighter: #e6f7f4;
 
   --green: #305c5f;
   --lightgreen: #b1ebe0;

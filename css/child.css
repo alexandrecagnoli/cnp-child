@@ -20,7 +20,12 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-title);
 }
 
+a:not(.btn) { color: var(--color-section-title); }
 a:not(.btn):hover { opacity: 0.85; }
+
+/* footer "Made with love by Alfred" link — was orange, now charter */
+.mast-foot a.orange,
+.orange { color: var(--color-section-title) !important; }
 
 /* ============================================================
    BUTTONS — primary CTA mint, Connexion violet
@@ -115,30 +120,24 @@ a:not(.btn):hover { opacity: 0.85; }
 }
 
 /* ============================================================
-   HERO — split layout: dark purple gradient left, image right
-   (keeps DOM; bg-image is repositioned to the right half)
+   HERO — ARMPO charter gradient (left text, right bg image)
+   NOTE: browsers auto-close <h2> when they hit nested <h1>,
+   so the actual H1 is a SIBLING of .hero-title — we style both.
    ============================================================ */
 .hero.hero-jumbo {
   position: relative;
   padding: 0;
-  background-color: #0e1247;
-  background-repeat: no-repeat;
-  background-position: right center;
-  background-size: 55% 100%;
+  background-image: linear-gradient(312deg, #071D1F 29.35%, #9D6BFF 167.24%);
   overflow: hidden;
 }
 
-.hero.hero-jumbo::before {
+/* if a hero image is set as section bg-image (inline style), keep the gradient
+   on top with controlled opacity so the picture still reads */
+.hero.hero-jumbo[style*="background-image"]::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    100deg,
-    #0e1247 0%,
-    #1c2068 45%,
-    rgba(28, 32, 104, 0.85) 52%,
-    rgba(28, 32, 104, 0) 65%
-  );
+  background: linear-gradient(312deg, #071D1F 29.35%, rgba(157, 107, 255, 0.6) 167.24%);
   pointer-events: none;
   z-index: 0;
 }
@@ -151,37 +150,30 @@ a:not(.btn):hover { opacity: 0.85; }
   min-height: 520px;
 }
 
-.hero-jumbo .hero-content {
-  max-width: 620px;
-}
+.hero-jumbo .hero-content { max-width: 640px; }
 
+/* h2.hero-title is auto-emptied by the parser. style the H1 sibling. */
+.hero-content h1,
 .hero-jumbo .hero-title,
 .hero .hero-title {
   color: var(--white);
   font-family: var(--font-title);
-  font-size: 54px;
+  font-size: 48px;
   font-weight: 600;
   line-height: 1.1;
   margin: 0 0 0.5em;
-}
-
-.hero-jumbo .hero-title h1,
-.hero .hero-title h1 {
-  color: var(--white);
-  font-family: var(--font-title);
-  font-size: inherit;
-  font-weight: inherit;
-  line-height: inherit;
-  margin: 0;
   padding: 0;
 }
 
+/* eyebrow (the <span> inside the H1) */
+.hero-content h1 span,
+.hero-content h1 > span:first-child,
 .hero-jumbo .hero-title span,
 .hero .hero-title span {
   display: block;
   color: var(--white);
   font-family: var(--font-title);
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 400;
   line-height: 1.2;
   margin: 0 0 0.6em;
@@ -197,7 +189,7 @@ a:not(.btn):hover { opacity: 0.85; }
   font-weight: 400;
   line-height: 1.5;
   margin: 0 0 2em;
-  max-width: 520px;
+  max-width: 540px;
 }
 
 .hero-jumbo .hero-cta .btn-orange {
@@ -206,32 +198,30 @@ a:not(.btn):hover { opacity: 0.85; }
   color: var(--color-section-title);
 }
 
-/* the right-hand img is empty in source; bg-image already shows on the right */
-.hero-jumbo .hero-image {
-  display: none;
+/* if the hero-image <img> is empty (no src yet), hide its wrapper so the
+   left content can use the full container width; show it once filled */
+.hero .hero-image img[src=""],
+.hero .hero-image img:not([src]) { display: none; }
+.hero .hero-image:has(img[src=""]),
+.hero .hero-image:has(img:not([src])) { display: none; }
+
+.hero .hero-image img {
+  border-radius: var(--radius-small);
+  object-fit: cover;
 }
 
 @media screen and (max-width: 991px) {
-  .hero.hero-jumbo {
-    background-size: cover;
-    background-position: center;
-  }
-  .hero.hero-jumbo::before {
-    background: linear-gradient(
-      180deg,
-      rgba(14, 18, 71, 0.85) 0%,
-      rgba(14, 18, 71, 0.65) 100%
-    );
-  }
   .hero.hero-jumbo > .container {
     padding-top: 3em;
     padding-bottom: 3em;
-    min-height: 380px;
+    min-height: 360px;
   }
+  .hero-content h1,
   .hero-jumbo .hero-title,
-  .hero .hero-title { font-size: 36px; }
+  .hero .hero-title { font-size: 32px; }
+  .hero-content h1 span,
   .hero-jumbo .hero-title span,
-  .hero .hero-title span { font-size: 18px; }
+  .hero .hero-title span { font-size: 16px; }
 }
 
 /* ============================================================
