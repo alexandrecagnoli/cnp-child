@@ -9,6 +9,7 @@
 body {
   font-family: var(--font-default);
   color: var(--color-text-body);
+  font-size: 16px;
 }
 
 .container {
@@ -134,15 +135,16 @@ a:not(.btn):hover { opacity: 0.85; }
 .hero.hero-jumbo {
   position: relative;
   padding: 0 !important;
-  margin: 0;
-  width: 100%;
+  margin: 1.5em;
+  width: auto;
   background-image: linear-gradient(312deg, #071D1F 29.35%, #9D6BFF 167.24%) !important;
   background-color: #071D1F;
   background-size: cover;
   overflow: hidden;
+  border-radius: 20px;
 }
 
-/* full-bleed container inside hero only (other sections keep theirs) */
+/* container inside hero is full-width of the (now-contained) section */
 .hero.hero-jumbo > .container {
   position: relative;
   z-index: 1;
@@ -165,10 +167,7 @@ a:not(.btn):hover { opacity: 0.85; }
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding-top: 4em;
-    padding-bottom: 4em;
-    padding-left: max(2em, calc((100vw - 1670px) / 2 + 2em));
-    padding-right: 3em;
+    padding: 4em 3em 4em 4em;
   }
   .hero-jumbo .hero-image {
     flex: 1 1 50%;
@@ -239,9 +238,12 @@ a:not(.btn):hover { opacity: 0.85; }
 }
 
 @media screen and (max-width: 991px) {
+  .hero.hero-jumbo {
+    margin: 0.75em;
+    border-radius: 14px;
+  }
   .hero.hero-jumbo > .container {
-    padding-top: 3em;
-    padding-bottom: 3em;
+    padding: 2.5em 1.5em;
     min-height: 360px;
   }
   .hero-content h1,
@@ -275,15 +277,27 @@ a:not(.btn):hover { opacity: 0.85; }
   font-weight: 400;
   line-height: 1.5;
   text-align: center;
+  max-width: 720px;
+  margin: 0.6em auto 0;
 }
 
 /* ============================================================
    EVENTS — light wrapper, white cards with date pill + CTA
+   The cards overlap the hero bottom (negative margin pulls them up).
    (don't touch .agenda-slider internals — controlled by tiny-slider)
    ============================================================ */
 .agenda-ticker-wrapper {
   background-color: transparent;
-  padding: 2.5em 0;
+  position: relative;
+  z-index: 2;
+  margin-top: -3em;
+  padding: 0 1.5em 2.5em;
+}
+@media screen and (max-width: 991px) {
+  .agenda-ticker-wrapper {
+    margin-top: -1.5em;
+    padding: 0 0.5em 1.5em;
+  }
 }
 
 .agenda-ticker-controls {
@@ -346,7 +360,7 @@ a:not(.btn):hover { opacity: 0.85; }
 .agenda-slider-item .item-content p {
   color: var(--color-text-body);
   font-family: var(--font-title);
-  font-size: 14px;
+  font-size: 16px;
   margin: 0.25em 0 0;
 }
 .agenda-slider-item .item-cta {
@@ -357,9 +371,10 @@ a:not(.btn):hover { opacity: 0.85; }
    MISSION GRID — CSS grid (not a slider), widen to 5 cols
    ============================================================ */
 .mission-grid {
-  margin: 2.5em auto 4em;
-  column-gap: 1.25em;
-  row-gap: 1.25em;
+  margin: 2em auto 1em;
+  column-gap: 1.5em;
+  row-gap: 1.5em;
+  max-width: 1280px;
 }
 
 @media screen and (min-width: 1100px) {
@@ -371,14 +386,14 @@ a:not(.btn):hover { opacity: 0.85; }
   background: var(--white);
   border-radius: var(--radius-small);
   box-shadow: var(--shadow);
-  padding: 2em 1.5em;
+  padding: 1.75em 1.25em;
   text-align: center;
 }
 
 .mission-grid .item-icon {
-  max-width: 56px;
-  max-height: 56px;
-  margin: 0 auto 1em;
+  max-width: 48px;
+  max-height: 48px;
+  margin: 0 auto 0.8em;
   display: block;
 }
 .mission-grid .item-title {
@@ -386,18 +401,18 @@ a:not(.btn):hover { opacity: 0.85; }
   font-family: var(--font-title);
   font-size: 18px;
   font-weight: 600;
-  margin: 0 0 0.6em;
+  margin: 0 0 0.5em;
 }
 .mission-grid .item-text {
   color: var(--color-text-body);
   font-family: var(--font-title);
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.45;
   max-width: none;
 }
 
 .section-header {
-  padding-top: 1em;
+  padding-top: 1.5em;
 }
 
 /* ============================================================
@@ -416,7 +431,7 @@ a:not(.btn):hover { opacity: 0.85; }
    ============================================================ */
 .cta-section,
 #parcours.cta-section {
-  padding: 5em 0;
+  padding: 7em 2em;
   text-align: center;
   color: var(--white);
   position: relative;
@@ -541,7 +556,7 @@ a:not(.btn):hover { opacity: 0.85; }
 .block_grid_card .item-text {
   color: var(--color-text-body);
   font-family: var(--font-title);
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.5;
 }
 .block_grid_card .item-content .right {
@@ -598,7 +613,7 @@ a:not(.btn):hover { opacity: 0.85; }
 .card-news .item-excerpt {
   color: var(--color-text-body);
   font-family: var(--font-title);
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.5;
 }
 .card-news .item-excerpt p {
