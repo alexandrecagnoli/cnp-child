@@ -34,8 +34,8 @@ a:not(.btn):hover { opacity: 0.85; }
    Violet ("gros boutons violets"): Connexion + CTA Parcours
    ============================================================ */
 .btn {
-  border-radius: 7px;
-  padding: 10px 30px;
+  border-radius: 999px;
+  padding: 10px 28px;
   font-family: var(--font-title);
   font-weight: 400;
   font-size: 16px;
@@ -53,10 +53,10 @@ a:not(.btn):hover { opacity: 0.85; }
   align-items: center;
   justify-content: center;
   gap: 10px;
-  border-radius: 7px;
+  border-radius: 999px;
   background-color: #B1EBE0;
   border-color: #B1EBE0;
-  padding: 10px 30px;
+  padding: 10px 28px;
   color: #192829;
   font-family: var(--font-title);
   font-size: 16px;
@@ -79,8 +79,8 @@ a:not(.btn):hover { opacity: 0.85; }
   background-color: #7C55C8;
   border-color: #7C55C8;
   color: var(--white);
-  border-radius: 7px;
-  padding: 15px 30px;
+  border-radius: 999px;
+  padding: 12px 28px;
   font-family: var(--font-title);
   font-size: 16px;
   font-weight: 400;
@@ -135,7 +135,7 @@ a:not(.btn):hover { opacity: 0.85; }
 .hero.hero-jumbo {
   position: relative;
   padding: 0 !important;
-  margin: 1.5em;
+  margin: 0.75em !important;
   width: auto;
   background-image: linear-gradient(312deg, #071D1F 29.35%, #9D6BFF 167.24%) !important;
   background-color: #071D1F;
@@ -158,32 +158,34 @@ a:not(.btn):hover { opacity: 0.85; }
 
 @media screen and (min-width: 768px) {
   .hero.hero-jumbo > .container {
-    display: flex;
-    flex-direction: row;
+    display: flex !important;
+    flex-direction: row !important;
   }
-  .hero-jumbo .hero-content {
-    flex: 1 1 45%;
-    max-width: 45%;
+  .hero.hero-jumbo .hero-content {
+    flex: 1 1 45% !important;
+    max-width: 45% !important;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 4em 2em 4em 4em;
+    padding: 4em 2em 4em 4em !important;
   }
-  .hero-jumbo .hero-image {
-    flex: 1 1 55%;
-    max-width: 55%;
+  /* Override parent: .hero .hero-image { margin-left: 30px } */
+  .hero.hero-jumbo .hero-image {
+    flex: 1 1 55% !important;
+    max-width: 55% !important;
     align-self: stretch;
-    margin: 0;
+    margin: 0 !important;
+    margin-left: 0 !important;
     overflow: visible;
   }
-  .hero-jumbo .hero-image img {
-    width: 100%;
-    height: 100%;
+  .hero.hero-jumbo .hero-image img {
+    width: 100% !important;
+    height: 100% !important;
     object-fit: cover;
     display: block;
     /* Asymmetric radius — taller-than-wide concave curve on bottom-left
        so the dark gradient pane shows through. Matches HP_2 mockup. */
-    border-radius: 0 0 0 35% / 0 0 0 55%;
+    border-radius: 0 0 0 35% / 0 0 0 55% !important;
   }
 }
 
@@ -288,17 +290,26 @@ a:not(.btn):hover { opacity: 0.85; }
    The cards overlap the hero bottom (negative margin pulls them up).
    (don't touch .agenda-slider internals — controlled by tiny-slider)
    ============================================================ */
+/* Kill margin-collapse so the section's bg-lightgrey doesn't ride up
+   into the hero when the wrapper inside gets a negative margin-top. */
+.hero.hero-jumbo + section,
+.hero.hero-jumbo + section.bg-lightgrey {
+  padding-top: 1px;
+  overflow: visible;
+}
+
 .agenda-ticker-wrapper {
-  background-color: transparent;
+  background-color: transparent !important;
   position: relative;
-  z-index: 2;
-  margin-top: -3em;
-  padding: 0 1.5em 2.5em;
+  z-index: 3;
+  margin-top: -3.5em !important;
+  padding: 0 1.5em 2.5em !important;
+  overflow: visible;
 }
 @media screen and (max-width: 991px) {
   .agenda-ticker-wrapper {
-    margin-top: -1.5em;
-    padding: 0 0.5em 1.5em;
+    margin-top: -1.5em !important;
+    padding: 0 0.5em 1.5em !important;
   }
 }
 
@@ -310,27 +321,32 @@ a:not(.btn):hover { opacity: 0.85; }
 }
 
 .agenda-slider-item {
-  display: flex;
-  align-items: center;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
   gap: 1.25em;
   background: var(--white);
   border-radius: var(--radius-small);
   box-shadow: var(--shadow);
-  padding: 1.25em 1.5em;
+  padding: 1.25em 1.5em !important;
   margin: 0 0.5em;
+  min-height: 110px;
 }
 
 .agenda-slider-item .item-date {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
   justify-content: center;
   flex-shrink: 0;
-  min-width: 56px;
+  min-width: 64px;
   text-align: center;
+  margin: 0 !important;
 }
 
 .agenda-slider-item .item-date-day {
+  display: block !important;
   color: var(--color-section-title);
   font-family: var(--font-title);
   font-size: 32px;
@@ -623,6 +639,19 @@ a:not(.btn):hover { opacity: 0.85; }
 }
 .card-news .d-flex.justify-end {
   margin-top: auto;
+}
+
+/* News slider dots — mint pill markers, matching the ARMPO charter */
+#actualites .tns-nav button,
+.news-slider-wrapper .tns-nav button {
+  background-color: var(--color-teal);
+  opacity: 0.3;
+  width: 10px;
+  height: 10px;
+}
+#actualites .tns-nav button.tns-nav-active,
+.news-slider-wrapper .tns-nav button.tns-nav-active {
+  opacity: 1;
 }
 
 /* ============================================================
