@@ -97,44 +97,60 @@ if (!current_user_can('administrator')) {
 
 
 /**
- * Inject the ACF `hero_image` field into the hero <img> on the front page.
+ * Hydrate the empty `<img src="" alt=""/>` inside `.hero-image` with an
+ * actual image. Priority order:
+ *   1. ACF `hero_image` on the current page
+ *   2. The section's inline `background-image` URL (already set on .hero)
  *
- * The parent template renders an empty `<img src="" alt=""/>` inside
- * `.hero-image`. We hydrate it server-side from the ACF field — no JS,
- * no reflow, no extra request beyond the image itself.
+ * Runs on every front-end singular request — bails out fast in the
+ * callback if there is no hero markup to replace.
  */
 add_action('template_redirect', 'cnp_child_inject_hero_image');
 function cnp_child_inject_hero_image()
 {
-  if (!is_front_page() && !is_home()) return;
-  if (!function_exists('get_field')) return;
-
+  if (is_admin()) return;
   ob_start('cnp_child_replace_hero_image');
 }
 
 function cnp_child_replace_hero_image($html)
 {
-  $img = get_field('hero_image');
-  if (empty($img)) return $html;
+  // Bail fast if the markup we care about isn't here.
+  if (strpos($html, 'class="hero-image') === false) return $html;
+  if (strpos($html, '<img src="" alt=""') === false) return $html;
 
-  if (is_array($img)) {
-    $url = $img['url'] ?? ($img['sizes']['large'] ?? '');
-    $alt = $img['alt'] ?? '';
-  } elseif (is_numeric($img)) {
-    $url = wp_get_attachment_image_url((int)$img, 'large');
-    $alt = get_post_meta((int)$img, '_wp_attachment_image_alt', true) ?: '';
-  } else {
-    $url = (string)$img;
-    $alt = '';
+  $url = '';
+  $alt = '';
+
+  // 1) Try ACF first
+  if (function_exists('get_field')) {
+    $img = get_field('hero_image');
+    if (!empty($img)) {
+      if (is_array($img)) {
+        $url = $img['url'] ?? ($img['sizes']['large'] ?? '');
+        $alt = $img['alt'] ?? '';
+      } elseif (is_numeric($img)) {
+        $url = wp_get_attachment_image_url((int)$img, 'large');
+        $alt = get_post_meta((int)$img, '_wp_attachment_image_alt', true) ?: '';
+      } else {
+        $url = (string)$img;
+      }
+    }
+  }
+
+  // 2) Fallback: pull the URL out of the .hero section's inline style
+  if (!$url) {
+    if (preg_match(
+      '#<section class="hero[^"]*"[^>]*style="[^"]*background-image:\s*url\(([^)]+)\)#i',
+      $html,
+      $m
+    )) {
+      $url = trim($m[1], " \"'");
+    }
   }
 
   if (!$url) return $html;
 
-  $replacement = sprintf(
-    '<img src="%s" alt="%s"/>',
-    esc_url($url),
-    esc_attr($alt)
-  );
+  $replacement = sprintf('<img src="%s" alt="%s"/>', esc_url($url), esc_attr($alt));
 
   return preg_replace(
     '#(<div class="hero-image[^"]*"[^>]*>\s*)<img\s+src=""\s+alt=""\s*/?>#i',
