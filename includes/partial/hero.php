@@ -52,6 +52,12 @@ $resolve_image = static function ($value, $size = 'large') {
 $bg    = $resolve_image($hero_bg, 'full');
 $image = $resolve_image($hero_image, 'large');
 
+// Fallback: if no dedicated right-pane image, reuse the section bg image
+// so the right half doesn't render as a dead dark band.
+if (!$image['url'] && $bg['url']) {
+    $image = $bg;
+}
+
 $classes = ['hero', 'hero-jumbo', 'hero-left'];
 if ($hero_type)    $classes[] = 'hero-type-' . sanitize_html_class($hero_type);
 if ($hero_overlay) $classes[] = 'has-overlay';
