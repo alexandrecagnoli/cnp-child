@@ -8,8 +8,8 @@
  *
  * ACF fields used (page-level):
  *   hero_type     radio    — variant key (added as a CSS class)
- *   hero_title    wysiwyg  — main title HTML
- *   hero_subtitle text     — eyebrow line above the title
+ *   hero_title    wysiwyg  — full title HTML (already includes its own <h1> + eyebrow <span>)
+ *   hero_subtitle text     — descriptive paragraph below the title
  *   hero_cta_url  text     — CTA href
  *   hero_cta_text text     — CTA label
  *   hero_image    image    — right-side picture
@@ -65,12 +65,15 @@ $style_attr = $bg['url']
 <section class="<?php echo $class_attr; ?>"<?php echo $style_attr; ?>>
     <div class="container d-flex align-center">
         <div class="hero-content flex-1">
-            <h1 class="hero-title font-title">
-                <?php if ($hero_subtitle) : ?>
-                    <span class="hero-eyebrow"><?php echo esc_html($hero_subtitle); ?></span>
-                <?php endif; ?>
+            <?php if ($hero_title) : ?>
                 <?php echo wp_kses_post($hero_title); ?>
-            </h1>
+            <?php endif; ?>
+
+            <?php if ($hero_subtitle) : ?>
+                <div class="hero-text">
+                    <?php echo esc_html($hero_subtitle); ?>
+                </div>
+            <?php endif; ?>
 
             <?php if ($hero_cta_text || $hero_cta_url) : ?>
                 <div class="hero-cta font-cond">
