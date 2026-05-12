@@ -23,7 +23,7 @@ h1, h2, h3, h4, h5, h6 {
 a:not(.btn):hover { opacity: 0.85; }
 
 /* ============================================================
-   BUTTONS — primary CTA mint, secondary "Connexion" violet
+   BUTTONS — primary CTA mint, Connexion violet
    ============================================================ */
 .btn {
   border-radius: var(--radius-small);
@@ -109,16 +109,83 @@ a:not(.btn):hover { opacity: 0.85; }
   background: var(--color-teal);
 }
 
+.mast-head .logo img {
+  max-height: 60px;
+  width: auto;
+}
+
 /* ============================================================
-   HERO — visual only, no DOM/layout changes
+   HERO — split layout: dark purple gradient left, image right
+   (keeps DOM; bg-image is repositioned to the right half)
    ============================================================ */
+.hero.hero-jumbo {
+  position: relative;
+  padding: 0;
+  background-color: #0e1247;
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: 55% 100%;
+  overflow: hidden;
+}
+
+.hero.hero-jumbo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    #0e1247 0%,
+    #1c2068 45%,
+    rgba(28, 32, 104, 0.85) 52%,
+    rgba(28, 32, 104, 0) 65%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero.hero-jumbo > .container {
+  position: relative;
+  z-index: 1;
+  padding-top: 5em;
+  padding-bottom: 5em;
+  min-height: 520px;
+}
+
+.hero-jumbo .hero-content {
+  max-width: 620px;
+}
+
 .hero-jumbo .hero-title,
 .hero .hero-title {
-  color: var(--color-mint);
+  color: var(--white);
   font-family: var(--font-title);
-  font-size: 62px;
+  font-size: 54px;
   font-weight: 600;
-  line-height: 1.05;
+  line-height: 1.1;
+  margin: 0 0 0.5em;
+}
+
+.hero-jumbo .hero-title h1,
+.hero .hero-title h1 {
+  color: var(--white);
+  font-family: var(--font-title);
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+.hero-jumbo .hero-title span,
+.hero .hero-title span {
+  display: block;
+  color: var(--white);
+  font-family: var(--font-title);
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.2;
+  margin: 0 0 0.6em;
+  letter-spacing: 0;
 }
 
 .hero-jumbo .hero-text,
@@ -126,13 +193,45 @@ a:not(.btn):hover { opacity: 0.85; }
 .hero .hero-text p {
   color: var(--white);
   font-family: var(--font-title);
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 400;
-  line-height: 1.4;
+  line-height: 1.5;
+  margin: 0 0 2em;
+  max-width: 520px;
+}
+
+.hero-jumbo .hero-cta .btn-orange {
+  background-color: var(--color-mint);
+  border-color: var(--color-mint);
+  color: var(--color-section-title);
+}
+
+/* the right-hand img is empty in source; bg-image already shows on the right */
+.hero-jumbo .hero-image {
+  display: none;
 }
 
 @media screen and (max-width: 991px) {
-  .hero-jumbo .hero-title { font-size: 42px; }
+  .hero.hero-jumbo {
+    background-size: cover;
+    background-position: center;
+  }
+  .hero.hero-jumbo::before {
+    background: linear-gradient(
+      180deg,
+      rgba(14, 18, 71, 0.85) 0%,
+      rgba(14, 18, 71, 0.65) 100%
+    );
+  }
+  .hero.hero-jumbo > .container {
+    padding-top: 3em;
+    padding-bottom: 3em;
+    min-height: 380px;
+  }
+  .hero-jumbo .hero-title,
+  .hero .hero-title { font-size: 36px; }
+  .hero-jumbo .hero-title span,
+  .hero .hero-title span { font-size: 18px; }
 }
 
 /* ============================================================
@@ -145,6 +244,7 @@ a:not(.btn):hover { opacity: 0.85; }
   font-weight: 500;
   line-height: 1.15;
   text-align: center;
+  padding: 0;
 }
 
 .section-subtitle,
@@ -158,131 +258,350 @@ a:not(.btn):hover { opacity: 0.85; }
 }
 
 /* ============================================================
-   EVENTS / AGENDA — style items only, leave slider intact
+   EVENTS — light wrapper, white cards with date pill + CTA
+   (don't touch .agenda-slider internals — controlled by tiny-slider)
    ============================================================ */
+.agenda-ticker-wrapper {
+  background-color: transparent;
+  padding: 2.5em 0;
+}
+
+.agenda-ticker-controls {
+  color: var(--color-section-title);
+}
+.agenda-ticker-controls button {
+  color: var(--color-section-title);
+}
+
 .agenda-slider-item {
+  display: flex;
+  align-items: center;
+  gap: 1.25em;
   background: var(--white);
   border-radius: var(--radius-small);
   box-shadow: var(--shadow);
+  padding: 1.25em 1.5em;
+  margin: 0 0.5em;
+}
+
+.agenda-slider-item .item-date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  min-width: 56px;
+  text-align: center;
 }
 
 .agenda-slider-item .item-date-day {
-  color: var(--color-teal);
+  color: var(--color-section-title);
   font-family: var(--font-title);
   font-size: 32px;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1;
 }
 .agenda-slider-item .item-date-month,
 .agenda-slider-item .item-date-year {
-  color: var(--color-teal);
+  color: var(--color-section-title);
   font-family: var(--font-default);
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 11px;
+  font-weight: 600;
   line-height: 1.2;
   text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.agenda-slider-item .item-content {
+  flex: 1;
 }
 .agenda-slider-item .item-title,
 .agenda-slider-item .item-title a {
   color: var(--color-section-title);
   font-family: var(--font-title);
+  font-size: 17px;
+  font-weight: 600;
+  margin: 0;
+}
+.agenda-slider-item .item-content p {
+  color: var(--color-text-body);
+  font-family: var(--font-title);
+  font-size: 14px;
+  margin: 0.25em 0 0;
+}
+.agenda-slider-item .item-cta {
+  flex-shrink: 0;
 }
 
 /* ============================================================
-   MISSION GRID — visual only (let parent grid columns flow)
+   MISSION GRID — CSS grid (not a slider), widen to 5 cols
    ============================================================ */
+.mission-grid {
+  margin: 2.5em auto 4em;
+  column-gap: 1.25em;
+  row-gap: 1.25em;
+}
+
+@media screen and (min-width: 1100px) {
+  .mission-grid { grid-template-columns: repeat(5, 1fr); }
+}
+
 .mission-grid-item,
 .card.mission-grid-item {
   background: var(--white);
   border-radius: var(--radius-small);
   box-shadow: var(--shadow);
+  padding: 2em 1.5em;
+  text-align: center;
+}
+
+.mission-grid .item-icon {
+  max-width: 56px;
+  max-height: 56px;
+  margin: 0 auto 1em;
+  display: block;
 }
 .mission-grid .item-title {
   color: var(--color-section-title);
   font-family: var(--font-title);
+  font-size: 18px;
   font-weight: 600;
+  margin: 0 0 0.6em;
 }
 .mission-grid .item-text {
   color: var(--color-text-body);
   font-family: var(--font-title);
+  font-size: 14px;
+  line-height: 1.45;
+  max-width: none;
+}
+
+.section-header {
+  padding-top: 1em;
 }
 
 /* ============================================================
-   CTA BIG (Parcours pro) — visual only
+   CTA BANNER — editorial image
    ============================================================ */
+#banner picture,
+#banner img {
+  border-radius: var(--radius-small);
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ============================================================
+   CTA BIG (Parcours pro)
+   ============================================================ */
+.cta-section,
+#parcours.cta-section {
+  padding: 5em 0;
+  text-align: center;
+  color: var(--white);
+  position: relative;
+  background-size: cover;
+  background-position: center;
+}
+.cta-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(14, 18, 71, 0.55);
+  pointer-events: none;
+}
+.cta-section .container {
+  position: relative;
+  z-index: 1;
+}
 .cta-section h2,
 #parcours.cta-section h2 {
   color: var(--white);
   font-family: var(--font-title);
   font-size: 40px;
   font-weight: 500;
+  margin: 0 0 0.4em;
+  line-height: 1.15;
+}
+.cta-section h2 .purple,
+#parcours.cta-section h2 .purple {
+  color: #b6a8ff;
+  font-weight: 500;
 }
 .cta-section .cta-subtitle {
-  color: var(--color-mint);
+  color: var(--white);
   font-family: var(--font-title);
-  font-size: 22px;
-  font-weight: 500;
+  font-size: 18px;
+  font-weight: 400;
+  margin: 0 auto 1.8em;
+  max-width: 760px;
+  line-height: 1.5;
 }
 .cta-section .btn {
   background-color: #5b3cc4;
   border-color: #5b3cc4;
   color: var(--white);
+  min-width: 280px;
 }
 .cta-section .btn:hover {
   background-color: #4a2db0;
   border-color: #4a2db0;
   opacity: 1;
 }
+.cta-section .btn:empty::before {
+  content: "Découvrir le DPC et les certifications";
+}
 
 /* ============================================================
-   TWO CARDS (Espace) — visual only, don't override flex layout
+   TWO CARDS (Espace) — keep parent's d-flex, set gap and equal width
    ============================================================ */
+.block_grid {
+  gap: 2em;
+  align-items: stretch;
+}
 .block_grid_card {
+  flex: 1;
   background: var(--white);
   border-radius: var(--radius-small);
   box-shadow: var(--shadow);
+  overflow: hidden;
+  padding: 0;
+}
+.block_grid_card .item-image {
+  width: 40%;
+  max-width: 40%;
+  align-self: stretch;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.block_grid_card .item-content {
+  padding: 1.8em 1.6em;
+  flex: 1;
 }
 .block_grid_card .item-title {
   color: var(--color-section-title);
   font-family: var(--font-title);
+  font-size: 18px;
+  font-weight: 400;
+  margin: 0 0 0.6em;
+  line-height: 1.1;
+}
+.block_grid_card .item-title .purple {
+  display: block;
+  color: #5b3cc4;
+  font-size: 28px;
   font-weight: 600;
+  margin-top: 0.1em;
 }
 .block_grid_card .item-text {
   color: var(--color-text-body);
   font-family: var(--font-title);
+  font-size: 14px;
+  line-height: 1.5;
+}
+.block_grid_card .item-content .right {
+  text-align: right;
+  margin: 1em 0 0;
 }
 
 /* ============================================================
-   NEWS (Actualités) — style cards only, leave slider intact
+   NEWS (Actualités) — visual on cards only
+   (don't touch .news-slider — controlled by tiny-slider)
    ============================================================ */
+#actualites .section-title {
+  margin-bottom: 1.5em;
+}
 .card-news {
   background: var(--white);
   border-radius: var(--radius-small);
   box-shadow: var(--shadow);
+  overflow: hidden;
+  padding: 0;
+  margin: 0 0.5em;
+  height: 100%;
+  flex-direction: column;
+}
+.card-news img,
+.card-news .wp-post-image,
+.card-news .attachment-post-thumbnail {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.card-news .item-content {
+  padding: 1.4em 1.5em 1.5em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6em;
 }
 .card-news .item-meta,
 .card-news .item-meta .darkblue,
 .card-news .item-meta a {
   color: var(--color-teal);
+  font-family: var(--font-default);
+  font-size: 12px;
 }
 .card-news .item-title,
 .card-news .item-title a {
   color: var(--color-section-title);
   font-family: var(--font-title);
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.25;
 }
 .card-news .item-excerpt {
   color: var(--color-text-body);
   font-family: var(--font-title);
+  font-size: 14px;
+  line-height: 1.5;
+}
+.card-news .item-excerpt p {
+  margin: 0;
+}
+.card-news .d-flex.justify-end {
+  margin-top: auto;
 }
 
 /* ============================================================
-   PARTNERS (Composition) — style logo items only, leave slider intact
+   PARTNERS / COMPOSITION — visual on logo items only
+   (don't touch .logo-gallery — controlled by tiny-slider)
    ============================================================ */
+#partners.bg-lightgrey {
+  padding-top: 3em;
+  padding-bottom: 4em;
+}
+#partners .section-title {
+  margin-bottom: 1.5em;
+}
+.logo-gallery {
+  flex-wrap: wrap;
+  gap: 1em;
+}
 .logo-gallery .logo-item {
   background: var(--white);
   border-radius: var(--radius-small);
   box-shadow: var(--shadow);
+  padding: 1.5em;
+  min-height: 120px;
 }
+.logo-gallery .logo-item img {
+  max-height: 70px;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.mast-foot {
+  background: var(--white);
+  color: var(--color-text-body);
+  font-family: var(--font-title);
+}
+.mast-foot a { color: var(--color-teal); }
 
 /* ============================================================
    ULTIMATE MEMBER
