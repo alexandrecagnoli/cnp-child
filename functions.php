@@ -114,6 +114,9 @@ function cnp_child_inject_hero_image()
 
 function cnp_child_replace_hero_image($html)
 {
+  // Debug marker — confirms the ob_start callback fires
+  $html = "<!-- cnp_hero_hook:on -->\n" . $html;
+
   // Bail fast if the markup we care about isn't here.
   if (strpos($html, 'class="hero-image') === false) return $html;
   if (strpos($html, '<img src="" alt=""') === false) return $html;
@@ -158,4 +161,31 @@ function cnp_child_replace_hero_image($html)
     $html,
     1
   );
+}
+
+/**
+ * Client-side safety net: if the PHP ob_start replacement didn't run for
+ * any reason (parent theme buffering, plugin interference), set the hero
+ * <img> src from the section's inline background-image URL.
+ */
+add_action('wp_footer', 'cnp_child_hero_image_js_fallback', 99);
+function cnp_child_hero_image_js_fallback()
+{
+  if (is_admin()) return;
+?>
+  <script>
+    (function () {
+      var img = document.querySelector('.hero .hero-image img');
+      if (!img || img.getAttribute('src')) return;
+      var section = document.querySelector('.hero');
+      if (!section) return;
+      var bg = section.style.backgroundImage || '';
+      var m = bg.match(/url\(["']?([^"')]+)["']?\)/);
+      if (m && m[1]) {
+        img.src = m[1];
+        img.alt = '';
+      }
+    })();
+  </script>
+<?php
 }
