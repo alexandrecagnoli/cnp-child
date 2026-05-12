@@ -306,6 +306,14 @@ a:not(.btn):hover { opacity: 0.85; }
   padding: 0 1.5em 2.5em !important;
   overflow: visible;
 }
+
+/* tiny-slider injects .tns-outer/.tns-inner that default to overflow:hidden,
+   which clips the cards' drop shadow. Let it breathe vertically. */
+.agenda-ticker-wrapper .tns-outer,
+.agenda-ticker-wrapper .tns-inner {
+  overflow: visible !important;
+  padding-bottom: 12px;
+}
 @media screen and (max-width: 991px) {
   .agenda-ticker-wrapper {
     margin-top: -1.5em !important;
@@ -388,8 +396,17 @@ a:not(.btn):hover { opacity: 0.85; }
 /* ============================================================
    MISSION GRID — CSS grid (not a slider), widen to 5 cols
    ============================================================ */
+/* The partial uses <section class="bg-lightgrey nopadding"> which
+   strips padding. Re-add bottom breathing room so the next section
+   (Parcours banner) doesn't butt up against the cards. */
+#missions.bg-lightgrey,
+#missions {
+  padding-top: 2em !important;
+  padding-bottom: 4em !important;
+}
+
 .mission-grid {
-  margin: 2em auto 1em;
+  margin: 2em auto 0;
   column-gap: 1.5em;
   row-gap: 1.5em;
   max-width: 1280px;
