@@ -1,46 +1,143 @@
-
 /* ============
-Import variable 
-=============*/
+   Import variables
+   ============= */
 @import "var.css";
 
+/* ============
+   Layout
+   ============= */
 .container {
   max-width: 1670px;
 }
 
-/* ===============
-    PRIMARY
-   =============== */
+/* ============
+   Typography globals
+   ============= */
+body {
+  font-family: var(--font-default);
+}
 
-/*== ULTIMATE MEMBER ==*/
+.font-title,
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-title);
+}
 
+/* ============
+   Main nav
+   ============= */
+.main-nav ul a {
+  color: var(--color-text-dark);
+  font-family: var(--font-title);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: normal;
+  text-align: center;
+}
+
+/* ============
+   H1 small (centered, dark)
+   ============= */
+.h1-small,
+h1.is-small {
+  color: var(--color-text-dark);
+  font-family: var(--font-title);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: normal;
+  text-align: center;
+}
+
+/* ============
+   Hero
+   ============= */
+.hero-title {
+  color: var(--color-mint);
+  font-family: var(--font-title);
+  font-size: 62px;
+  font-weight: 600;
+  line-height: 65px;
+}
+
+.hero-text,
+.hero-text p {
+  color: var(--white);
+  font-family: var(--font-title);
+  font-size: 22px;
+  font-weight: 400;
+  line-height: normal;
+}
+
+/* ============
+   Event cards (agenda)
+   ============= */
+.agenda-slider-item {
+  border-radius: var(--radius-small);
+  background: var(--white);
+  box-shadow: var(--shadow);
+}
+
+.agenda-slider-item .item-date-day {
+  color: var(--color-teal);
+  font-family: var(--font-title);
+  font-size: 32px;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.agenda-slider-item .item-date-month,
+.agenda-slider-item .item-date-year {
+  color: var(--color-teal);
+  font-family: var(--font-default);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* ============
+   Section title + intro (centered)
+   ============= */
+.section-title,
+.section-header .section-title {
+  color: var(--color-section-title);
+  font-family: var(--font-title);
+  font-size: 40px;
+  font-weight: 500;
+  line-height: normal;
+  text-align: center;
+}
+
+.section-subtitle,
+.section-header .section-subtitle,
+.section-header p {
+  color: var(--color-text-body);
+  font-family: var(--font-title);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: normal;
+  text-align: center;
+}
+
+/* ============
+   Ultimate Member
+   ============= */
 .um:not(.um-admin) {
-  opacity: 1!important;
-}
-.um-page-login .page-title {
-}
-.um-button {
-}
-.um-button:hover {
+  opacity: 1 !important;
 }
 
-/*== TEMPLATE ==*/
-
+/* ============
+   Login templates (page-log1 / page-log2)
+   ============= */
 .page-template-page-log1 .mast-head,
 .page-template-page-log2 .mast-head {
 }
 .page-template-page-log1 .section-login,
 .page-template-page-log2 .section-login {
 }
-
-.page-template-page-log1 .section-login {
-}
 .page-template-page-log1 .section-login .btn {
 }
 .page-template-page-log1 .section-login .block-login {
-}
-
-.page-template-page-log2 .section-login {
 }
 .page-template-page-log2 .section-content {
 }
@@ -48,6 +145,7 @@ Import variable
 }
 .page-template-page-log2 .section-login .block-login {
 }
+
 @media screen and (min-width: 992px) {
   .page-template-page-log2 .layout-2-col {
   }
