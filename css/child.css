@@ -216,6 +216,79 @@ table tr :first-child {
   width: auto;
 }
 
+/* ----- Mobile header (<992px) -------------------------------- */
+@media screen and (max-width: 991px) {
+  .mast-head {
+    padding: 0.6em 1em;
+  }
+  .mast-head .main-nav {
+    column-gap: 0.5em;
+    row-gap: 0;
+  }
+  .mast-head .logo img {
+    max-height: 44px;
+  }
+  /* Keep the (hidden) menu UL from claiming flex space so the logo
+     stays anchored left and the actions group on the right. */
+  .mast-head .main-nav > ul {
+    width: 0;
+    flex-basis: 0;
+    margin: 0;
+    padding: 0;
+  }
+  /* Hamburger: push to far right and group with the connexion button. */
+  .mast-head .hamburger {
+    order: 3;
+    padding: 6px;
+    margin: 0;
+  }
+  .mast-head .hamburger-box {
+    width: 26px;
+    height: 18px;
+  }
+  .mast-head .hamburger-inner,
+  .mast-head .hamburger-inner::before,
+  .mast-head .hamburger-inner::after {
+    width: 26px !important;
+    height: 2px !important;
+    background-color: var(--color-section-title) !important;
+    border-radius: 2px !important;
+  }
+  .mast-head .hamburger-inner::before { top: -8px !important; }
+  .mast-head .hamburger-inner::after  { bottom: -8px !important; }
+
+  /* Connexion pill — tighter on mobile, anchored just before the burger. */
+  .mast-head .btn-orange-secondary {
+    order: 2;
+    margin-left: auto;
+    padding: 8px 16px !important;
+    font-size: 13px !important;
+  }
+
+  /* Open-menu panel — make the stacked list breathe and match charter. */
+  .menu-collapse .main-nav > ul {
+    padding: 0.5em 0 !important;
+    margin-top: 0.75em;
+    border-top: 1px solid var(--color-mint);
+    width: 100%;
+    background: var(--white);
+  }
+  .menu-collapse .main-nav > ul > li {
+    padding: 0.6em 0 !important;
+    width: 100%;
+    text-align: center;
+  }
+  .menu-collapse .main-nav > ul > li a {
+    font-size: 16px;
+  }
+  /* Underline accent on current item — hide on mobile, it's noisy
+     against centered stacked links. */
+  .menu-collapse .main-nav > ul > li.current-menu-item > a::after,
+  .menu-collapse .main-nav > ul > li.current_page_item > a::after {
+    display: none;
+  }
+}
+
 /* ============================================================
    HERO — ARMPO spec
    Full-bleed section; 50/50 split with text left, ACF image right.
