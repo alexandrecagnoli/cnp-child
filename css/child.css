@@ -24,6 +24,14 @@ h1, h2, h3, h4, h5, h6 {
 a:not(.btn) { color: var(--color-section-title); }
 a:not(.btn):hover { opacity: 0.85; }
 
+hr {
+  border: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-mint), transparent);
+  margin: 2.5em auto;
+  max-width: 480px;
+}
+
 /* footer "Made with love by Alfred" link — was orange, now charter */
 .mast-foot a.orange,
 .orange { color: var(--color-section-title) !important; }
