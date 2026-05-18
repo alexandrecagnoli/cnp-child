@@ -822,6 +822,248 @@ a:not(.btn):hover { opacity: 0.85; }
 }
 
 /* ============================================================
+   INNER PAGES (page-menuleft-* templates)
+   Three-col layout: side nav | article | news sidebar.
+   Goals: more elegant left menu, breathing room around sidebar
+   cards, charter-aligned typography for titles and lists.
+   ============================================================ */
+
+/* Layout spacing — give the columns vertical breathing room and
+   widen the article column on desktop. */
+.layout-3-col {
+  row-gap: 2.5em;
+  margin-top: 2em;
+  margin-bottom: 4em;
+}
+
+/* ----- Left sidebar nav -------------------------------------- */
+.nav-wrapper img:first-child {
+  margin: 0 auto 1.5em;
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.sidebar-nav {
+  background: var(--white);
+  border: 1px solid var(--color-mint);
+  border-radius: var(--radius-small);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.sidebar-nav ul {
+  margin: 0;
+}
+
+/* Top-level link — section header (was harsh dark navy band) */
+.sidebar-nav > ul > li > a {
+  background-color: var(--color-mint) !important;
+  color: var(--color-section-title) !important;
+  font-family: var(--font-title);
+  font-size: 15px;
+  font-weight: 600;
+  padding: 0.9em 1.25em !important;
+  border-radius: 0 !important;
+  letter-spacing: 0.02em;
+}
+.sidebar-nav > ul > li > a:before {
+  filter: brightness(0) saturate(100%) invert(28%) sepia(13%) saturate(1109%) hue-rotate(135deg) brightness(94%) contrast(89%);
+  opacity: 0.65 !important;
+}
+
+/* Removed the parent's tinted background on every nested li so the
+   submenu sits on white. Round the whole block, not each item. */
+.sidebar-nav > ul > li,
+.sidebar-nav > ul li {
+  background-color: transparent !important;
+  border-radius: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.sidebar-nav > ul > li ul {
+  padding: 0.5em 0;
+}
+.sidebar-nav > ul > li ul li {
+  padding: 0 !important;
+}
+.sidebar-nav > ul > li ul li a {
+  padding: 0.55em 1.25em 0.55em 1em;
+  color: var(--color-text-body) !important;
+  font-family: var(--font-title);
+  font-size: 15px;
+  font-weight: 500;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+.sidebar-nav > ul > li ul li a:hover {
+  background-color: rgba(177, 235, 224, 0.35);
+  color: var(--color-section-title) !important;
+  opacity: 1;
+}
+.sidebar-nav li.current_page_item > a,
+.sidebar-nav > ul > li ul li.current_page_item > a {
+  color: var(--color-section-title) !important;
+  background-color: rgba(177, 235, 224, 0.5);
+  font-weight: 600 !important;
+}
+
+/* ----- Article column ---------------------------------------- */
+.page-header {
+  border-bottom: 1px solid var(--color-mint);
+  padding-bottom: 1em;
+  margin-bottom: 1.5em;
+}
+.page-title {
+  color: var(--color-section-title);
+  font-family: var(--font-title);
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 0.2em;
+}
+.page-subtitle {
+  color: var(--color-teal);
+  font-family: var(--font-title);
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+.page-content {
+  color: var(--color-text-body);
+  font-family: var(--font-title);
+  font-size: 17px;
+  line-height: 1.6;
+}
+.page-content h2,
+.page-content h3,
+.page-content h4 {
+  color: var(--color-section-title);
+  font-family: var(--font-title);
+}
+.page-content h2 {
+  font-weight: 600;
+  margin-top: 1.6em;
+  margin-bottom: 0.4em;
+}
+.page-content h3 {
+  font-weight: 600;
+  margin-top: 1.4em;
+  margin-bottom: 0.3em;
+}
+.page-content h4 {
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 600;
+}
+.page-content a {
+  color: var(--color-section-title);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: var(--color-teal);
+}
+.page-content a:hover {
+  text-decoration-color: var(--color-section-title);
+}
+
+/* Lists — replace the dark-ringed dot with a soft mint bullet */
+.page-content ul {
+  padding-left: 1.25em;
+}
+.page-content li {
+  margin-bottom: 0.6em;
+}
+.page-content ul li:before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border: 0;
+  background-color: var(--color-teal);
+  border-radius: 50%;
+  position: absolute;
+  margin-left: -18px;
+  margin-top: 11px;
+}
+.page-content ol {
+  padding-left: 1.5em;
+}
+.page-content ol li::marker {
+  color: var(--color-teal);
+  font-weight: 600;
+}
+
+/* "Liens utiles" card */
+.card.card-links {
+  background: var(--white);
+  border: 1px solid var(--color-mint);
+  border-radius: var(--radius-small);
+  box-shadow: var(--shadow);
+  padding: 1.5em 1.75em;
+  margin-top: 2em;
+}
+.card.card-links .item-title {
+  color: var(--color-section-title);
+  font-family: var(--font-title);
+  font-weight: 600;
+  font-size: 17px;
+  margin-bottom: 0.6em;
+}
+.card.card-links .item-title i {
+  color: var(--color-teal);
+  margin-right: 0.4em;
+}
+.card.card-links ul {
+  padding-left: 0;
+  margin: 0;
+  list-style: none;
+}
+.card.card-links li {
+  margin-bottom: 0.4em;
+}
+.card.card-links li:before {
+  display: none;
+}
+.card.card-links li a {
+  color: var(--color-section-title);
+}
+
+/* ----- Right sidebar (post-feed) ----------------------------- */
+.sidebar > .post-feed,
+.sidebar-block.post-feed {
+  border-top: 0 !important;
+  margin-top: 0;
+  padding-top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25em;
+}
+.sidebar .block-title,
+.sidebar-block .block-title {
+  color: var(--color-section-title) !important;
+  font-family: var(--font-title);
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: none !important;
+  letter-spacing: 0.02em;
+  margin: 0 0 0.25em !important;
+}
+
+/* Sidebar news cards inherit the archive look but slightly more
+   compact, and crucially have gap between them (above). */
+.sidebar .card-news.card-width-picture,
+.sidebar .card-news.card-width-picture.bg-lightgrey {
+  margin: 0;
+}
+.sidebar .card-news.card-width-picture .card-content {
+  padding: 1em 1.25em 1.25em;
+  gap: 0.5em;
+}
+.sidebar .card-news.card-width-picture .item-title,
+.sidebar .card-news.card-width-picture .item-title a {
+  font-size: 16px;
+}
+.sidebar .card-news.card-width-picture .item-excerpt {
+  font-size: 14px;
+}
+
+/* ============================================================
    FOOTER
    ============================================================ */
 .mast-foot {
