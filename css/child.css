@@ -200,6 +200,7 @@ a:not(.btn):hover { opacity: 0.85; }
     width: 100% !important;
     height: 100% !important;
     object-fit: cover;
+    object-position: left center;
     display: block;
     /* Asymmetric radius — taller-than-wide concave curve on bottom-left
        so the dark gradient pane shows through. Matches HP_2 mockup. */
@@ -676,17 +677,24 @@ a:not(.btn):hover { opacity: 0.85; }
   margin-top: auto;
 }
 
-/* News slider dots — mint pill markers, matching the ARMPO charter */
+/* News slider dots — harmonised with the partners slider below
+   (same dark dot, same opacities). Force square box + 50% radius +
+   no padding/border so it can't render as an oval. */
 #actualites .tns-nav button,
 .news-slider-wrapper .tns-nav button {
-  background-color: var(--color-teal);
-  opacity: 0.3;
   width: 10px;
   height: 10px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background-color: var(--color-text-dark);
+  opacity: 0.25;
+  margin: 0.2em;
+  box-sizing: content-box;
 }
 #actualites .tns-nav button.tns-nav-active,
 .news-slider-wrapper .tns-nav button.tns-nav-active {
-  opacity: 1;
+  opacity: 0.5;
 }
 
 /* ============================================================
@@ -728,6 +736,12 @@ a:not(.btn):hover { opacity: 0.85; }
   font-family: var(--font-title);
 }
 .mast-foot a { color: var(--color-teal); }
+
+@media screen and (min-width: 992px) {
+  .mast-foot-columns > .mast-foot-branding {
+    flex: 2;
+  }
+}
 
 /* ============================================================
    ULTIMATE MEMBER
