@@ -29,13 +29,19 @@
     <link rel="profile" href="https://gmpg.org/xfn/11" />
     <link rel="pingback" href="<?php echo esc_url(get_bloginfo('pingback_url')); ?>">
     <?php wp_head(); ?>
-    <?php $logo = get_logo(); ?>
+    <?php $logo = function_exists('get_field') ? get_field('site_logo', 'option') : null; ?>
 </head>
 
 <body <?php body_class(); ?>>
     <header class="mast-head">
         <nav class="main-nav container">
-            <a href="<?php echo home_url(); ?>" class="logo"><img src="<?= $logo['url']; ?>" alt="Logo"></a>
+            <a href="<?php echo home_url(); ?>" class="logo">
+                <?php if (!empty($logo['url'])) : ?>
+                    <img src="<?php echo esc_url($logo['url']); ?>" alt="<?php echo esc_attr(!empty($logo['alt']) ? $logo['alt'] : get_bloginfo('name')); ?>">
+                <?php else : ?>
+                    <span class="logo-text"><?php bloginfo('name'); ?></span>
+                <?php endif; ?>
+            </a>
             <?php
             wp_nav_menu(array(
                 'theme_location' => 'header-menu',

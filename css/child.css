@@ -29,6 +29,24 @@ a:not(.btn):hover { opacity: 0.85; }
 .orange { color: var(--color-section-title) !important; }
 
 /* ============================================================
+   ORANGE PURGE — kill leftover orange from cnp-base parent theme
+   The parent hardcodes #f89325 on sub-menu hover and ships an
+   orange chevron icon in the sidebar nav. Both bypass the
+   --main_secondary remap, so we override them explicitly here.
+   ============================================================ */
+.mast-head .main-nav > ul > li > ul.sub-menu > *:hover {
+  background-color: var(--color-mint) !important;
+}
+.mast-head .main-nav > ul > li > ul.sub-menu > *:hover a {
+  color: var(--color-text-dark) !important;
+}
+
+/* Replace parent's chevron-right-orange.svg with a charter-green inline SVG. */
+.sidebar-nav ul li ul li a:before {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 14'><path d='M1 1l6 6-6 6' fill='none' stroke='%23305c5f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>") !important;
+}
+
+/* ============================================================
    BUTTONS — ARMPO spec
    Mint ("boutons verts"): primary CTAs everywhere
    Violet ("gros boutons violets"): Connexion + CTA Parcours
