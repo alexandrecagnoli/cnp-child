@@ -697,6 +697,80 @@ a:not(.btn):hover { opacity: 0.85; }
   opacity: 0.5;
 }
 
+/* tiny-slider clips the cards' drop shadow by default (overflow:hidden
+   on .tns-outer/.tns-inner). Let it breathe. */
+#actualites .tns-outer,
+#actualites .tns-inner {
+  overflow: visible !important;
+  padding-bottom: 12px;
+}
+
+/* ============================================================
+   NEWS ARCHIVE (index.php — "Toute l'actualité du CNP")
+   Reuse the homepage card look on .card-news.card-width-picture
+   and tighten the grid gaps.
+   ============================================================ */
+.layout-archive {
+  column-gap: 1.5em !important;
+  row-gap: 1.5em;
+  margin-top: 1.5em;
+  margin-bottom: 2em;
+}
+
+.card-news.card-width-picture,
+.card-news.card-width-picture.bg-lightgrey {
+  background: var(--white) !important;
+  border-radius: var(--radius-small);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+.card-news.card-width-picture > a,
+.card-news.card-width-picture > a img,
+.card-news.card-width-picture .wp-post-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.card-news.card-width-picture .card-content {
+  padding: 1.4em 1.5em 1.5em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6em;
+  flex: 1;
+}
+.card-news.card-width-picture .item-date {
+  color: var(--color-teal);
+  font-family: var(--font-default);
+  font-size: 12px;
+  margin: 0;
+}
+.card-news.card-width-picture .item-title,
+.card-news.card-width-picture .item-title a {
+  color: var(--color-section-title);
+  font-family: var(--font-title);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.25;
+  margin: 0;
+}
+.card-news.card-width-picture .item-excerpt {
+  color: var(--color-text-body);
+  font-family: var(--font-title);
+  font-size: 16px;
+  line-height: 1.5;
+}
+.card-news.card-width-picture .item-excerpt p {
+  margin: 0 0 0.8em;
+}
+.card-news.card-width-picture .readmorelink {
+  margin-top: auto;
+  align-self: flex-end;
+}
+
 /* ============================================================
    PARTNERS / COMPOSITION — visual on logo items only
    (don't touch .logo-gallery — controlled by tiny-slider)
