@@ -116,6 +116,26 @@ a:not(.btn):hover { opacity: 0.85; }
    ============================================================ */
 .mast-head {
   background: var(--white);
+  padding: 1em 1em;
+}
+
+/* Breadcrumb band — swap parent's harsh dark navy for the hero's
+   mint, with dark text for readability. */
+.breadcrumbs-wrapper {
+  background-color: var(--color-mint) !important;
+}
+.breadcrumbs {
+  padding: 1em 1.5em;
+}
+.breadcrumbs li,
+.breadcrumbs li a {
+  color: var(--color-text-dark) !important;
+}
+.breadcrumbs li a {
+  text-decoration: none;
+}
+.breadcrumbs li a:hover {
+  opacity: 0.7;
 }
 
 .mast-head .main-nav > ul > li a {
