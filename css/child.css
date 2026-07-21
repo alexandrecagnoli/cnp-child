@@ -191,6 +191,17 @@ table tr :first-child {
   opacity: 0.7;
 }
 
+/* Blog: breathing room under the breadcrumb band + article title spec. */
+.blog .breadcrumbs-wrapper + .container {
+  padding-top: 2em;
+}
+.article-title {
+  color: var(--main_primary);
+  font-family: var(--font-title);
+  font-size: 2.7em;
+  margin-top: 1.5em;
+}
+
 .mast-head .main-nav > ul > li a {
   color: var(--color-text-dark);
   font-family: var(--font-title);
