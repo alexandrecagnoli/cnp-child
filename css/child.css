@@ -261,7 +261,9 @@ table tr :first-child {
     background-color: var(--color-section-title) !important;
     border-radius: 2px !important;
   }
-  .mast-head .hamburger-inner::before { top: -8px !important; }
+  /* No !important on ::before top — the emphatic active state animates it
+     to top:-80px to form the X; forcing it would strand the bar low. */
+  .mast-head .hamburger-inner::before { top: -8px; }
   .mast-head .hamburger-inner::after  { bottom: -8px !important; }
 
   /* Connexion pill — tighter on mobile, anchored just before the burger. */
