@@ -93,6 +93,42 @@ function my_register_menus_child()
 if (!current_user_can('administrator')) {
   add_filter('show_admin_bar', '__return_false');
 }
+
+/**
+ * Image featured par défaut.
+ *
+ * Toute loop qui affiche l'image à la une via the_post_thumbnail() /
+ * get_the_post_thumbnail() sur un post qui n'en a pas récupère
+ * automatiquement /images/post-default.png du thème enfant, au lieu d'une
+ * sortie vide. S'applique à toutes les loops (parent + enfant) sans avoir à
+ * les modifier une par une.
+ */
+add_filter('post_thumbnail_html', 'armpo_default_featured_image', 20, 5);
+function armpo_default_featured_image($html, $post_id, $post_thumbnail_id, $size, $attr)
+{
+  // Le post a déjà une image à la une : on ne touche à rien.
+  if ($html !== '') {
+    return $html;
+  }
+
+  $src = get_stylesheet_directory_uri() . '/images/post-default.png';
+
+  // On conserve la classe demandée par la loop (sinon on reconstruit les
+  // classes WordPress standard à partir de la taille demandée).
+  if (is_array($attr) && !empty($attr['class'])) {
+    $class = $attr['class'];
+  } else {
+    $size_name = is_string($size) ? $size : 'post-thumbnail';
+    $class = 'wp-post-image attachment-' . $size_name . ' size-' . $size_name;
+  }
+
+  return sprintf(
+    '<img src="%s" class="%s" alt="%s" loading="lazy" decoding="async" />',
+    esc_url($src),
+    esc_attr($class),
+    esc_attr(get_the_title($post_id))
+  );
+}
 # add_filter( 'um_disable_dynamic_global_css', '__return_true' );
 
 

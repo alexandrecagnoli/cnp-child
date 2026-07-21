@@ -956,7 +956,7 @@ table tr :first-child {
 
 /* Layout spacing — give the columns vertical breathing room and
    widen the article column on desktop. */
-.layout-3-col {
+.layout-3-col, .layout-2-col {
   row-gap: 2.5em;
   margin-top: 2em;
   margin-bottom: 4em;
@@ -969,7 +969,9 @@ table tr :first-child {
   height: auto;
   display: block;
 }
-
+.nav-wrapper{
+  margin-bottom:2em;
+}
 .sidebar-nav {
   background: var(--white);
   border: 1px solid var(--color-mint);
