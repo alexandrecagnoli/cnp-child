@@ -221,24 +221,31 @@ table tr :first-child {
   .mast-head {
     padding: 0.6em 1em;
   }
+  /* Stack the header vertically: logo on top, menu below it. The nav is
+     the positioning context for the absolute hamburger. */
   .mast-head .main-nav {
-    column-gap: 0.5em;
-    row-gap: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    column-gap: 0;
+    row-gap: 0.75em;
   }
   .mast-head .logo img {
     max-height: 44px;
   }
-  /* Keep the (hidden) menu UL from claiming flex space so the logo
-     stays anchored left and the actions group on the right. */
+  /* Closed menu: out of flow entirely so only logo + burger show. */
   .mast-head .main-nav > ul {
-    width: 0;
-    flex-basis: 0;
+    display: none;
+    width: 100%;
     margin: 0;
     padding: 0;
   }
-  /* Hamburger: push to far right and group with the connexion button. */
+  /* Hamburger: absolute top-right so it stays put whatever the nav
+     height (menu open or closed). */
   .mast-head .hamburger {
-    order: 3;
+    position: absolute;
+    top: 0.4em;
+    right: 0;
     padding: 6px;
     margin: 0;
   }
@@ -267,8 +274,10 @@ table tr :first-child {
 
   /* Open-menu panel — make the stacked list breathe and match charter. */
   .menu-collapse .main-nav > ul {
+    display: flex;
+    flex-direction: column;
     padding: 0.5em 0 !important;
-    margin-top: 0.75em;
+    margin-top: 0;
     border-top: 1px solid var(--color-mint);
     width: 100%;
     background: var(--white);
