@@ -52,7 +52,7 @@
                     <span class="hamburger-inner"></span>
                 </span>
             </button>
-            <?php
+            <?php /* Bouton « Accès membre / Connexion » masqué à la demande.
             if (is_user_logged_in()) {
                 $link = '/contenus-prives';
                 $text = 'Accès membre';
@@ -62,6 +62,7 @@
             }
             ?>
             <a class="btn btn-orange-secondary" href="<?php echo $link; ?>"><?php echo $text; ?></a>
+            <?php */ ?>
         </nav>
     </header>
     <main>
