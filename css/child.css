@@ -1219,7 +1219,16 @@ table tr :first-child {
   font-size: 16px;
 }
 .sidebar .card-news.card-width-picture .item-excerpt {
-  font-size: 14px;
+  font-size: 16px;
+}
+
+/* Blog single: 2-col grid (article 8 / sidebar 4) on desktop. */
+@media screen and (min-width: 992px) {
+  .layout-2-col-blog {
+    display: grid;
+    grid-template-columns: 8fr 4fr;
+    column-gap: 45px;
+  }
 }
 
 /* ============================================================
