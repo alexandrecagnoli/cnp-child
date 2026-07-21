@@ -292,6 +292,12 @@ table tr :first-child {
   .menu-collapse .main-nav > ul > li a {
     font-size: 16px;
   }
+  /* No hover dropdowns on mobile — the parent opens .sub-menu on :hover,
+     which sticks on touch. Kill it entirely (1st-level links only). */
+  .mast-head .main-nav .sub-menu,
+  .mast-head .main-nav > ul > li:hover > ul.sub-menu {
+    display: none !important;
+  }
   /* Underline accent on current item — hide on mobile, it's noisy
      against centered stacked links. */
   .menu-collapse .main-nav > ul > li.current-menu-item > a::after,
@@ -434,6 +440,8 @@ table tr :first-child {
   .hero .hero-title span { font-size: 22px; line-height: 1.3; }
   .hero-jumbo .hero-text,
   .hero .hero-text { font-size: 16px; }
+  /* Hide the right-pane image on mobile — text-only hero. */
+  .hero .hero-image { display: none; }
 }
 
 /* ============================================================
@@ -737,6 +745,7 @@ table tr :first-child {
   box-shadow: var(--shadow);
   overflow: hidden;
   padding: 0;
+  flex-direction: row !important;
 }
 .block_grid_card .item-image {
   width: 40%;
